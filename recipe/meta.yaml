@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/awkward0-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/awkward0-{{ version }}.tar.gz
   sha256: 156e6e338c56d857a7bb53c4fcc8b0b2592a3470eff0d854e6d68777986359ad
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
@@ -19,10 +19,10 @@ requirements:
   host:
     - pip
     - pytest-runner
-    - python =2.7|>=3.5
+    - python {{ python_min }}
   run:
     - numpy >=1.13.1
-    - python =2.7|>=3.5
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -32,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/scikit-hep/awkward-0.x
